@@ -1,20 +1,9 @@
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.evaluation.RegressionAnalysis;
-import weka.classifiers.functions.LinearRegression;
 import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.lazy.IBk;
-import weka.classifiers.pmml.consumer.Regression;
-import weka.classifiers.trees.J48;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.trees.RandomTree;
-import weka.core.Instance;
 import weka.core.Instances;
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 /**
  * Created by Hamid on 3/15/17.
  */
