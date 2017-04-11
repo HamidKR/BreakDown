@@ -6,76 +6,29 @@ public class CIFReader{
 public ABX3 molecule;
 
     public CIFReader(String file) {
-        String[] features = new String[19];
+        String[] features = new String[35];
         BufferedReader reader;
         String line;
-        int num=0;
         try {
 
             reader = new BufferedReader(new FileReader(file));
 
             line = reader.readLine();
 
-            while (line != null) {
-                num = num + 1;
-                switch(num) {
-                    case 0:
-                        features[0] = line.split("\\s+")[2];
-                        break;
-                    case 26:
-                        features[1] = line.split("\\s+")[1];
-                        break;
-                    case 27:
-                        features[2] = line.split("\\s+")[1];
-                        break;
-                    case 28:
-                        features[3] = line.split("\\s+")[1];
-                        break;
-                    case 29:
-                        features[4] = line.split("\\s+")[1];
-                        break;
-                    case 30:
-                        features[5] = line.split("\\s+")[1];
-                        break;
-                    case 42:
-                        features[6] = line.split("\\s+")[2];
-                        break;
-                    case 39:
-                        features[7] = line.split("\\s+")[2];
-                        break;
-                    case 41:
-                        features[8] = line.split("\\s+")[2];
-                        break;
-                    case 5:
-                        features[9] = line.split("\\s+")[1];
-                        break;
-                    case 6:
-                        features[10] = line.split("\\s+")[1];
-                        break;
-                    case 7:
-                        features[11] = line.split("\\s+")[1];
-                        break;
-                    case 8:
-                        features[12] = line.split("\\s+")[1];
-                        break;
-                    case 9:
-                        features[13] = line.split("\\s+")[1];
-                        break;
-                    case 10:
-                        features[14] = line.split("\\s+")[1];
-                        break;
-                    case 11:
-                        features[15] = line.split("\\s+")[1];
-                        break;
-                    case 33:
-                        features[16] = line.split("\\s+")[2];
-                        break;
-                    case 43:
-                        features[17] = line.split("\\s+")[2];
-                        break;
-                    case 12:
-                        features[18] = line.split("\\s+")[1];
-                        break;
+            for(int i=1; line != null; i++) {
+                if(i==1){
+                    features[0] = line.split("\\s+")[2];
+                } else if(5<=i && i<=12){
+                    features[i-4] = line.split("\\s+")[1];
+                } else if(26<=i && i<=30){
+                    features[4*i-95] = line.split("\\s+")[1];
+                    for(int j=3; j<=5; j++) {
+                        features[4*i+j-97] = line.split("\\s+")[j];
+                    }
+                } else if(i==32){
+                    features[29] = line.split("\\s+")[2];
+                } else if(39<=i && i<=43){
+                    features[i-9] = line.split("\\s+")[2];
                 }
                 line = reader.readLine();
             }

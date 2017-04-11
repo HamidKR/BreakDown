@@ -1,63 +1,61 @@
+import java.util.Arrays;
 
-/**
- * Created by Hamid on 2/14/17.
- */
 public class ABX3 {
-    public String name;
-    public String el1,el2,el3,el4,el5;
-    public double m1,m2,m3,am1,am2,am3;
-    public double Fb;
-    public double Eg;
-    public double OmegaMax;
-    public String SpaceGroup;
-    public int Natome;
-    public double Density;
-    public String LattisStruc;
+    public String name,SpaceGroup,LatticeStruc;
+    public double[] cell_lengths,cell_angles;
+    public String[] elements;
+    public double[][] r,pos;
+    public int Natoms;
+    public double Eg,Atomization,OmegaMax,Fb,Density;
 
-
-    public ABX3(String name, String el1, String el2, String el3, String el4, String el5, double m1, double m2, double m3, double am1, double am2, double am3, double Fb, double Eg,
-                double OmegaMax, int Natome, String SpaceGroup, String LattisStruc) {
+    public ABX3(String name, double[] cell_lengths, double[] cell_angles, String SpaceGroup, String LatticeStruc, String[] elements,
+                double[][] r, int Natoms, double Eg, double Atomization, double OmegaMax, double Fb, double Density) {
         this.name = name;
-        this.el1 = el1;
-        this.el2 = el2;
-        this.el3 = el3;
-        this.el4 = el4;
-        this.el5 = el5;
-        this.m1 = m1;
-        this.m2 = m2;
-        this.m3 = m3;
-        this.am1 = am1;
-        this.am2 = am2;
-        this.am3 = am3;
-        this.Fb = Fb;
-        this.Eg = Eg;
-        this.OmegaMax = OmegaMax;
+        this.cell_lengths = cell_lengths;
+        this.cell_angles = cell_angles;
         this.SpaceGroup = SpaceGroup;
-        this.Natome = Natome;
+        this.LatticeStruc = LatticeStruc;
+        this.elements = elements;
+        this.r = r;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<3; j++){
+                pos[i][j] = r[i][j]*cell_lengths[j];
+            }
+        }
+        this.Natoms = Natoms;
+        this.Eg = Eg;
+        this.Atomization = Atomization;
+        this.OmegaMax = OmegaMax;
+        this.Fb = Fb;
         this.Density = Density;
-        this.LattisStruc = LattisStruc;
     }
 
     public ABX3(String[] features) {
-        //this.id = Integer.parseInt(features[0].replace("\"",""));
         this.name = features[0];
-        this.el1 = features[1];
-        this.el2 = features[2];
-        this.el3 = features[3];
-        this.el4 = features[4];
-        this.el5 = features[5];
-        this.m1 = Double.parseDouble(features[9]);
-        this.m2 = Double.parseDouble(features[10]);
-        this.m3 = Double.parseDouble(features[11]);
-        this.am1 = Double.parseDouble(features[12]);
-        this.am2 = Double.parseDouble(features[13]);
-        this.am3 = Double.parseDouble(features[14]);
-        this.Fb = Double.parseDouble(features[6]);
-        this.Eg = Double.parseDouble(features[7]);
-        this.OmegaMax = Double.parseDouble(features[8]);
-        this.SpaceGroup = features[15];
-        this.Natome = Integer.parseInt(features[16]);
-        this.Density = Double.parseDouble(features[17]);
-        this.LattisStruc = features[18];
+        double[] cell_lengths = {Double.parseDouble(features[1]), Double.parseDouble(features[2]), Double.parseDouble(features[3])};
+        this.cell_lengths = cell_lengths;
+        double[] cell_angles = {Double.parseDouble(features[4]), Double.parseDouble(features[5]), Double.parseDouble(features[6])};
+        this.cell_angles = cell_angles;
+        this.SpaceGroup = features[7];
+        this.LatticeStruc = features[8];
+        String[] elements = new String[5];
+        double[][] r = new double[5][3];
+        double[][] pos = new double[5][3];
+        for(int i=0; i<5; i++){
+            elements[i] = features[9+4*i];
+            for(int j=0; j<3; j++){
+                r[i][j] = Double.parseDouble(features[10+4*i+j]);
+                pos[i][j] = r[i][j]*cell_lengths[j];
+            }
+        }
+        this.elements = elements;
+        this.r = r;
+        this.pos = pos;
+        this.Natoms = Integer.parseInt(features[29]);
+        this.Eg = Double.parseDouble(features[30]);
+        this.Atomization = Double.parseDouble(features[31]);
+        this.OmegaMax = Double.parseDouble(features[32]);
+        this.Fb = Double.parseDouble(features[33]);
+        this.Density = Double.parseDouble(features[34]);
     }
 }
