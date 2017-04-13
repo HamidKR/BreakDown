@@ -15,10 +15,12 @@ public class WekaApp
         BufferedReader reader = new BufferedReader(new FileReader("/Users/Hamid/Documents/MachineLearning/ABX3Data12.arff"));
         Instances data = new Instances(reader);
         reader.close();
-        for(int i=0; i<=5; i++)
-        {data.deleteAttributeAt(0);}
-        for(int i=3; i<12; i++)
-        {data.deleteAttributeAt(3);}
+        for(int i=0; i<=5; i++) {
+            data.deleteAttributeAt(0);
+        }
+        for(int i=3; i<12; i++) {
+            data.deleteAttributeAt(3);
+        }
         Instances train = data.trainCV(3,1);
         Instances test = data.testCV(3,1);
         // setting class attribute
