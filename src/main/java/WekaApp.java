@@ -12,7 +12,7 @@ public class WekaApp
 
     public static void main(String [ ] args) throws Exception
     {
-        BufferedReader reader = new BufferedReader(new FileReader("/Users/Hamid/Documents/MachineLearning/ABX3Data12.arff"));
+        BufferedReader reader = new BufferedReader(new FileReader("user.dir" + "/data/CIFABX3.csv"));
         Instances data = new Instances(reader);
         reader.close();
         for(int i=0; i<=5; i++) {

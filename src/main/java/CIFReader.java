@@ -49,9 +49,15 @@ public class CIFReader {
             for (int i = 0; i < reader.features.length - 1; i++) {
                 writer.print(reader.features[i] + ",");
             }
-            writer.println(reader.features[reader.features.length - 1]);
+            writer.print(reader.features[reader.features.length - 1]);
+            for (int k = 0; k <= 4; k++){
+                for(int l = 0; l <= 4; l++) {
+                    writer.print(reader.molecule.C[k][l] + ",");
+                }}
+                writer.println();
 
         }
+
         writer.close();
 }
 }
