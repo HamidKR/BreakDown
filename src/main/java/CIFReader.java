@@ -43,18 +43,23 @@ public class CIFReader {
     public static void main(String[] args) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(System.getProperty("user.dir") + "/data/CIFABX3.csv");
 
-        for (int j = 1519; j < 1727; j++){
+        for (int j = 1519; j <= 1727; j++){
         String filename = System.getProperty("user.dir") + "/data/ABX3CIF/"+(j)+".cif";
         CIFReader reader = new CIFReader(filename);
-            for (int i = 0; i < reader.features.length - 1; i++) {
+            for (int i = 0; i <= reader.features.length - 1; i++) {
                 writer.print(reader.features[i] + ",");
             }
-            writer.print(reader.features[reader.features.length - 1]);
-            for (int k = 0; k <= 4; k++){
+
+            for (int k = 0; k < 4; k++){
                 for(int l = 0; l <= 4; l++) {
                     writer.print(reader.molecule.C[k][l] + ",");
-                }}
-                writer.println();
+                }
+            }
+            for(int f = 0; f < 4; f++) {
+                writer.print(reader.molecule.C[4][f] + ",");
+            }
+            writer.print(reader.molecule.C[4][4]);
+            writer.println();
 
         }
 

@@ -20,3 +20,9 @@ annotation-cache/
 */*.swp
 *.swp
 out/
+/data/ABX3CIF/
+src/main/resources/
+src/main/scala-2.11/
+src/main/scala-2.12/
+src/main/scala/
+src/test/
